@@ -1,0 +1,32 @@
+id: 6b129e9f-0121-42e8-94f6-409b6c6a907a
+version: v2
+name: PetHospital
+apptype: api
+language: java
+containerName: pethospital
+toolchain:
+  id: 58e56a68acac5a0020e2b930
+  name: Qubeship-Java-Toolchain
+opinion:
+  id: 5930725dc07d6a9b2f54a244
+  name: Qubeship build-bake-deploy opinion
+endpoint:
+  id: 594300dbd8192b001fb10ba2
+  name: MyRegistry
+  type: registry
+variables:
+  - name: APP_VERSION
+    value: v0.1
+build:
+  compile:
+    publish:
+     - target/
+bake:
+  skip: false
+test:
+  skip: true
+deploy_to_qa:
+  skip: true
+deploy_to_prod:
+  skip: false
+
