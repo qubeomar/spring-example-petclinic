@@ -20,7 +20,16 @@ variables:
 build:
   compile:
     publish:
-     - target/
+    - target/
+  unittest:
+    publish:
+    - target
+    - target/surefire-reports/index.html
+    args:
+    - -Punit-integration-tests
+  package:
+    publish:
+    - target
 bake:
   skip: false
 test:
@@ -29,4 +38,29 @@ deploy_to_qa:
   skip: true
 deploy_to_prod:
   skip: false
-
+  functional_test:
+    publish:
+    - target
+    - target/surefire-reports/index.html
+    args:
+    - -Pfunctional-tests
+    - -Durl=http://myminikube
+    - -DseleniumGridUrl=http://192.168.99.101:32772/wd/hub
+    execute_outside_toolchain: false
+ports: 
+  container_ports:
+    - containerPort: 8443
+      name: https
+      protocol: TCP
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+  service_ports:
+    - name: "http"
+      protocol: "TCP"
+      port: 80
+      targetPort: 8080
+    - name: "https"
+      protocol: "TCP"
+      port: 443
+      targetPort: 8443
