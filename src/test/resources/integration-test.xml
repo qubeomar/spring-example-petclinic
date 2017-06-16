@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="0" name="Integeration suite" junit="true">
+  <test name="Integration test">
+    <classes>
+      <class name="org.springframework.samples.petclinic.owner.OwnerControllerTests"/>
+      <class name="org.springframework.samples.petclinic.owner.PetControllerTests"/>
+      <class name="org.springframework.samples.petclinic.owner.VisitControllerTests"/>
+      <class name="org.springframework.samples.petclinic.service.ClinicServiceTests"/>
+      <class name="org.springframework.samples.petclinic.system.CrashControllerTests"/>
+      <class name="org.springframework.samples.petclinic.system.ProductionConfigurationTests"/>
+      <class name="org.springframework.samples.petclinic.vet.VetControllerTests"/>
+    </classes>
+  </test> <!-- Surefire test -->
+</suite>

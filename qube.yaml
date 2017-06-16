@@ -1,0 +1,66 @@
+id: 'd3fe4a85-804c-4e54-b6d4-88cd5ef11eeb'
+version: 'v2'
+name: 'spring-example-petclinic'
+apptype: 'api'
+language: 'java'
+containerName: 'spring-example-petclinic'
+toolchain:
+  id: '58e56a68acac5a0020e2b930'
+  name: 'Qubeship-Java-Toolchain'
+opinion:
+  id: '5930725dc07d6a9b2f54a244'
+  name: 'Qubeship build-bake-deploy opinion'
+endpoint:
+  id: '5935f480d8192b001fd17c71'
+  name: 'MyMiniSanbox'
+  type: 'target'
+variables:
+- name: 'APP_VERSION'
+  value: 'v0.1'
+build:
+  compile:
+    publish:
+    - target/
+  unittest:
+    publish:
+    - target
+    - target/surefire-reports/index.html
+    args:
+    - -Punit-integration-tests
+  package:
+    publish:
+    - target
+bake:
+  skip: false
+test:
+  skip: true
+deploy_to_qa:
+  skip: true
+deploy_to_prod:
+  skip: false
+  functional_test:
+    publish:
+    - target
+    - target/surefire-reports/index.html
+    args:
+    - -Pfunctional-tests
+    - -Durl=http://myminikube
+    - -DseleniumGridUrl=http://192.168.99.100:32772/wd/hub
+    execute_outside_toolchain: false
+ports: 
+  container_ports:
+    - containerPort: 8443
+      name: https
+      protocol: TCP
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+  service_ports:
+    - name: "http"
+      protocol: "TCP"
+      port: 80
+      targetPort: 8080
+    - name: "https"
+      protocol: "TCP"
+      port: 443
+      targetPort: 8443
