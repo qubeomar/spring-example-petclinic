@@ -44,7 +44,7 @@ deploy_to_prod:
     - target/surefire-reports/index.html
     args:
     - -Pfunctional-tests
-    - -Durl=http://myminikube
+    - -Durl=http://myjavahost
     - -DseleniumGridUrl=http://192.168.99.101:32768/wd/hub
     execute_outside_toolchain: false
 ports: 
